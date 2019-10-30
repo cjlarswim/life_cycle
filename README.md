@@ -11,3 +11,10 @@ This system is especially valuable for following situations
 
 While turning assistants are a valid option for some traffic participants (i.e truck drivers), only 5% of all trucks on German roads are equipped with such a system. It will take another 20 years or so for the car and truck population to adapt a great enough turning assistant density to have a significant effect on safety on city roads for cyclist.
 Our system can be implemented quickly and at relatively low cost, hence, creating a higher level of safety at crossings which have been identified as dangerous.
+
+### Other Use Cases
+The systems main application is to warn drivers during the turning process. However, other applications can be realized using the exact same setup. 
+- Counting passing traffic participants at crossing (quantitativ)
+- Accident forensics
+- Observe behavior at intersection to train neural networks for more advanced predictive warning signals
+
