@@ -1,0 +1,18 @@
+#### Time Lag
+In first tests with the above mentioned prototype setup we observed a time lag of nearly 3.5 seconds during monitoring of a busy road.
+We assume that partially this time lag is connected to the memory leak found by the developers at moveLab, which is directly connected to the use of the OpenCV Framework. Basically, the camera uses up more and more primary memory space without releasing it after use. This leads to the primary memory being filled until there is not enough primary memory left to run the program (at ~70% occupancy rate). The GPU (in this case the docker running the program) will crash and be unresponsive. This issue is a fundamental one because it creates an unstable system which will crash every 30min - 50min (during our tests).
+The board needs to manually reseted. We wrote a workaround restarting the board automatically after a crash. However, this will only be sufficient for the current use as an exhibition model. In traffic situations the system has to work stable for weeks or months.
+Find the documentation and bug report here. 
+Additionally, we assume that the video processing and video display slows down the performance to a level where it is not usable for life applications.
+
+
+#### Performance Issues
+During prototype testing we examined a framerate of 5 - 7 FPS. Too efficiently and safely monitor an intersection we are looking to boost performance above 10 FPS. 
+Currently, it is unclear why the prototype setup generates such low frame rates. 
+
+#### Camera Performance
+First tests with the prototype showed that even with a low quality low resolution camera which is setup to do near field filming, it is possible to accurately detect cyclist at a range of 30m - 35m. Therefore we expect testing with high quality cameras a more focused field of vision and a longer range of detection.
+
+The prototype accurately differentiates between different traffic participants. Hence, it is not likely for a pedestrian with low speed or a dog to trigger the warning signal keeping the integrity of the signal for turning drivers at a high level. 
+
+Due to a wireless connection the camera can be set up separated from the warning signal. This physical separation enables monitoring of difficult to observe situations such as seen below at Oberbaumbrücke (Berlin) during road construction. 
