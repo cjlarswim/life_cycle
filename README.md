@@ -6,8 +6,8 @@ The system is ought to be implemented where traditional systems, such as mirrors
 
 This system is especially valuable for following situations 
 - the bike lane cannot be observed directly by the car driver :truck:
-- at temporary construction sites and in situations where :construction:
-- the bike path is not observable by turning assistants :point_right:
+- at temporary construction sites :construction:
+- in situations where the bike path is not observable by turning assistants :point_right:
 
 While turning assistants are a valid option for some traffic participants (i.e truck drivers), only 5% of all trucks on German roads are equipped with such a system. It will take another 20 years or so for the car and truck population to adapt a great enough turning assistant density to have a significant effect on safety on city roads for cyclist.
 Our system can be implemented quickly and at relatively low cost, hence, creating a higher level of safety at crossings which have been identified as dangerous.
