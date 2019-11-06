@@ -54,7 +54,7 @@ after installation check for Python version in Terminal:
 
 >We are not sure why python3 has to be installed. However, after some reasearch in the Nvidia Developer Forums we decided to do so. Anyway, Python never hurts. The installation process did run smoothly after doing so. :relaxed:
 
-### Download and run SDKManager [DOWNLOAD NVIDIA SDKMANAGER](https://www.developer.nvidia.com/nvidia-sdk-manager)
+### [DOWNLOAD NVIDIA SDKMANAGER](https://www.developer.nvidia.com/nvidia-sdk-manager)
 After Download from the website. Run in Terminal:
 `sudo apt install ./(*insert* your sdkmanager file)`
 
@@ -123,4 +123,4 @@ Use the toggles on the right hand side to add a new USB Filter. The Xavier shoul
 
 *Follow instructions provided*
 
-:enjoy:
+:tropical_drink:
