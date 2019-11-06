@@ -4,8 +4,7 @@
 This document is to describe the process of flashing the Jetson Xavier AGX Developer Kit (P2888) running Ubuntu 18.04 in a 
 virtual machine on MacOS Catalina (10.15). 
 Flashing the Xavier via a virtual machine (VM) is not officially supported. 
-While there is clear [a link](https://www.developer.nvidia.com/nvidia-sdk-manager) documentation and a great video by Jim 
-from JetsonHacks.com [a link](https://www.jetsonhacks.com/2019/06/04/nvidia-sdk-manager-for-jetson-jetpack-4-2/)on how to 
+While there is clear [documentation](https://www.developer.nvidia.com/nvidia-sdk-manager)and a great video by [Jim from JestonHacks.com](https://www.jetsonhacks.com/2019/06/04/nvidia-sdk-manager-for-jetson-jetpack-4-2/)on how to 
 flash the Xavier via a Ubuntu Host Computer there is only some unresolved threads in the Nvidia Developer Forum on how to flash via VM.
 
 The Process does require some tinkering around and is not guranteed to work. Following the steps and setup we used to get the Xavier up and running.
@@ -66,7 +65,7 @@ Login and follow the instructions.
 *Tip:* **Hit the checkbox 'Autologin'**
 
 
-## Install | Build OS (Ubuntu & Jetson) | Flash
+### Install | Build OS (Ubuntu & Jetson) | Flash**
 
 >In order for the Jetson to be flashed in needs to be directly connected to your guest machine. However, the USB-C ports of 
 >your Mac are used by the host machine and generally not recognized by the guest. Follow these steps to make your Xavier 
@@ -96,9 +95,9 @@ The SDKManager will download all necessary files, build and install the OS. At s
 *Power Off the virtual machine.*
 
 *boot your Nvidia Xavier into recovery mode* 
-[Nvidia Wiki](https://developer.ridgerun.com/wiki/index.php?title=Xavier/Flashing_the_Board)
+[Further Information](https://developer.ridgerun.com/wiki/index.php?title=Xavier/Flashing_the_Board)
 
-`1. Power down the device. If connected, remove the AC adapter from the device. The device must be powered OFF, and not in a 
+1. Power down the device. If connected, remove the AC adapter from the device. The device must be powered OFF, and not in a 
 suspend or sleep state.
 2. Connect the Type-C plug on the USB cable to the Recovery (USB Type-C) Port on the device and the other end to an 
 available USB port on the host PC.
@@ -107,7 +106,7 @@ available USB port on the host PC.
 5. Press and hold the FORCE RECOVERY button: while pressing the FORCE RECOVERY button, press and release the RESET button; 
 wait two seconds and release the FORCE RECOVERY button.
 6. When the device is in recovery mode, lsusb command on host will list a line of "NVidia Corp"
-In VB hit Settings.`
+In VB hit Settings.
 
 *Allocate USB-C port to guest machine*
 
@@ -123,3 +122,5 @@ Use the toggles on the right hand side to add a new USB Filter. The Xavier shoul
 *Run SDKManager via Terminal*
 
 *Follow instructions provided*
+
+:enjoy:
