@@ -1,6 +1,6 @@
-#Flashing XAVIER Via VM
+# Flashing XAVIER Via VM
 
-##Purpose
+## Purpose
 This document is to describe the process of flashing the Jetson Xavier AGX Developer Kit (P2888) running Ubuntu 18.04 in a 
 virtual machine on MacOS Catalina (10.15). 
 Flashing the Xavier via a virtual machine (VM) is not officially supported. 
@@ -10,9 +10,9 @@ flash the Xavier via a Ubuntu Host Computer there is only some unresolved thread
 
 The Process does require some tinkering around and is not guranteed to work. Following the steps and setup we used to get the Xavier up and running.
 
-##Hardware Setup
+## Hardware Setup
 For a reference of the necessary hardware Setup see the great Video of Jim from JetsonHacks.com:
-[a link](https://www.youtube.com/watch?v=Pncjv6FoQzU&t=155s)
+[Youtube Video of Hardware Setup](https://www.youtube.com/watch?v=Pncjv6FoQzU&t=155s)
 
 For our Setup via Mac we needed following hardware:
 
@@ -21,13 +21,13 @@ For our Setup via Mac we needed following hardware:
 - one USB-C to ethernet adapter
 - three USB-C to USB adapters
 
-##VirtualBox 6.0
+## VirtualBox 6.0
 VirtualBox 6.0 enables you to run any operating System parallel to your hosts machine OS. 
 While running it will use resources (which will be predetermined during setup) from your host machine.
 The process of setting up the Virtual Machine is documented well.
 Please refer to the manual for initial setup.
 
-[a link] (https://download.virtualbox.org/virtualbox/6.0.14/UserManual.pdf)
+[VB User Manual](https://download.virtualbox.org/virtualbox/6.0.14/UserManual.pdf)
 
 We allocated following resources to our VM running Ubuntu 18.04.
 
@@ -43,10 +43,10 @@ In this case we used an exertnal HDD to allocate that much HD space. See page 9&
       *chose your external HDD and alocate 100GB of space*
 
 Now your virtual machine is set and ready.
-Start Ubuntu 18.04 via Virtual Box and Download the SDKManager from Nvidias WebPage.
+*Start Ubuntu 18.04 via Virtual Box and Download the SDKManager from Nvidias WebPage.*
 
-##Steps to Flash
-###Install Python 3.7 on Guest Machine
+## Steps to Flash
+### Install Python 3.7 on Guest Machine
 In Terminal run:
 `sudo get apt-install Python`
 
@@ -55,7 +55,7 @@ after installation check for Python version in Terminal:
 
 >We are not sure why python3 has to be installed. However, after some reasearch in the Nvidia Developer Forums we decided to do so. Anyway, Python never hurts. The installation process did run smoothly after doing so. :relaxed:
 
-###Download and run SDKManager [a link](https://www.developer.nvidia.com/nvidia-sdk-manager)
+### Download and run SDKManager [DOWNLOAD NVIDIA SDKMANAGER](https://www.developer.nvidia.com/nvidia-sdk-manager)
 After Download from the website. Run in Terminal:
 `sudo apt install ./(*insert* your sdkmanager file)`
 
@@ -66,7 +66,7 @@ Login and follow the instructions.
 *Tip:* **Hit the checkbox 'Autologin'**
 
 
-##Install | Build OS (Ubuntu & Jetson) | Flash
+## Install | Build OS (Ubuntu & Jetson) | Flash
 
 >In order for the Jetson to be flashed in needs to be directly connected to your guest machine. However, the USB-C ports of 
 >your Mac are used by the host machine and generally not recognized by the guest. Follow these steps to make your Xavier 
@@ -96,12 +96,16 @@ The SDKManager will download all necessary files, build and install the OS. At s
 *Power Off the virtual machine.*
 
 *boot your Nvidia Xavier into recovery mode* 
-[a link](https://developer.ridgerun.com/wiki/index.php?title=Xavier/Flashing_the_Board)
-`1. Power down the device. If connected, remove the AC adapter from the device. The device must be powered OFF, and not in a suspend or sleep state.
-2. Connect the Type-C plug on the USB cable to the Recovery (USB Type-C) Port on the device and the other end to an available USB port on the host PC.
+[Nvidia Wiki](https://developer.ridgerun.com/wiki/index.php?title=Xavier/Flashing_the_Board)
+
+`1. Power down the device. If connected, remove the AC adapter from the device. The device must be powered OFF, and not in a 
+suspend or sleep state.
+2. Connect the Type-C plug on the USB cable to the Recovery (USB Type-C) Port on the device and the other end to an 
+available USB port on the host PC.
 3. Connect the power adapter to the device.
 4. Press and release the POWER button to power on device.
-5. Press and hold the FORCE RECOVERY button: while pressing the FORCE RECOVERY button, press and release the RESET button; wait two seconds and release the FORCE RECOVERY button.
+5. Press and hold the FORCE RECOVERY button: while pressing the FORCE RECOVERY button, press and release the RESET button; 
+wait two seconds and release the FORCE RECOVERY button.
 6. When the device is in recovery mode, lsusb command on host will list a line of "NVidia Corp"
 In VB hit Settings.`
 
