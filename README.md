@@ -12,7 +12,7 @@ This system is especially valuable for following situations
 While turning assistants are a valid option for some traffic participants (i.e truck drivers), only 5% of all trucks on German roads are equipped with such a system. It will take another 20 years or so for the car and truck population to adapt a great enough turning assistant density to have a significant effect on safety on city roads for cyclist.
 Our system can be implemented quickly and at relatively low cost, hence, creating a higher level of safety at crossings which have been identified as dangerous.
 
->insert Live Use Case Video
+![The Way it is supposed to work](https://user-images.githubusercontent.com/25865287/69149813-9870d800-0ad7-11ea-9e34-ff48cc96e01a.jpeg)
 
 ## Setup Your Own Prototyp
 Due to a memory leak caused by OpenCV we still decided to use the raspberry pi to fetch the data, process, and trigger. We are currently working on running all processing on the Jetson Board. 
