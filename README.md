@@ -15,9 +15,195 @@ Our system can be implemented quickly and at relatively low cost, hence, creatin
 >insert Live Use Case Video
 
 ## Setup Your Own Prototyp
+Due to a memory leak caused by OpenCV we still decided to use the raspberry pi to fetch the data, process, and trigger. We are currently working on running all processing on the Jetson Board. 
+We also included a type of error handling: before the Jetson board crashes we restart via a sudo command from the Raspberry.
+
 ### Hardware & Setup
+To build your own Life_Cycle() Prototype to test and develope new ideas and use cases you will need following hardware:
+
+#### Hardware Installation
+For installation of UBUNTU 18.04 onto _Jetson Boards_ and _Raspberry PI_ out of the box you will need:
+- a USB Mouse
+- a USB Keyboard
+- a monitor with an HDMI connector
+
+[For general Setup of Jetson Xavier Go Here](https://www.jetsonhacks.com/2018/10/05/jetpack-4-1-developer-preview-nvidia-jetson-agx-xavier-developer-kit/)
+[For Setup Jetson Xavier via a VM follow our guide](https://github.com/cjlarswim/life_cycle/blob/master/documentation/XavierSetupViaVirtualMachine.md)
+[For Raspberry Pi Setup Go Here](https://www.raspberrypi.org/documentation/)
+
+
+#### Processing and Object Detection
+- [Nvidia Jetson Nano or TX2 or or Xavier](https://developer.nvidia.com/embedded/develop/hardware)
+- USB Cam or CSI Cam
+  - Most USB Cams will be supported by the Jetson Boards
+  - For Setup we used the [Raspberry Cam](https://www.amazon.de/Electreeks-Raspberry-Kamera-Modul-Infrarot/dp/B0763Q5ZBS/ref=sr_1_2?__mk_de_DE=ÅMÅŽÕÑ&keywords=imx219&qid=1574165237&sr=8-2) Module with an IMX219 chip
+    - for Setup of a CSI connected cam use following [Instruction](https://github.com/opendatacam/opendatacam/blob/master/documentation/jetson/JETSON_NANO.md#experimental-use-raspberry-pi-cam-with-opendatacam-default-installation) while these instructions have been flagged as experimental - our setup worked just fine with it.
+
+#### Processing and Trigger
+- Raspberry 3, 3B, 3B+ or 4 (you will probably get away with older models as well, but we have not tested them yet)
+- Relais Module
+- lamp running on 230V (or any other type of trigger will do)
+
+![Setup Scheme](https://user-images.githubusercontent.com/25865287/69146282-c3572e00-0acf-11ea-82cc-136b21c07b76.jpeg)
+#### Network
+You can establish a network by setting up your raspberry as a hotspot. However, we experienced very low bandwith and hence low performance while testing. This will show as time lags in the detection and triggering of your warning signal. 
+
+Alternatively you can create a setup connecting both machines via an ethernet box. 
+_insert Image of Network Setup here with explanation_
+
 ### Connect & Test
+_insert Image of Setup_
+
+#### Connect (see image above)
+#### check for connection via router
+#### assign steady IP adresse
+#### connect via SSH
+
 ### Implement Python Code
+
+1. Import packages
+```
+  import time
+  import requests
+  import json
+  import RPi.GPIO as GPIO
+  import paramiko
+  import webbrowser
+```
+
+2. Set initial GPIO value and specify output pin
+```
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(12, GPIO.OUT, initial=GPIO.LOW);
+GPIO.setup(10, GPIO.OUT, initial=GPIO.LOW);
+```
+
+3. open shell and START docker container with ODC
+
+```
+def send_string_and_wait(command, wait_time, should_print, shell):
+    # Send the su command
+    shell.send(command)
+    # Wait a bit, if necessary
+    time.sleep(wait_time)
+    # Flush the receive buffer
+    receive_buffer = shell.recv(1024)
+    # Print the receive buffer, if necessary
+    if should_print:
+        print receive_buffer
+
+def startSSH():
+    # Create an SSH client
+    client = paramiko.SSHClient()
+    # Make sure that we add the remote server's SSH key automatically
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+    # Connect to the client
+    worker = 0
+    while worker == 0:
+        try:
+            client.connect('192.168.0.102', username='life_cycle', password='lifecycle')
+            worker = 1
+        except:
+            print("No Connection to @lifecycle")
+            time.sleep(10)
+
+    #Create a raw shell
+    shell = client.invoke_shell()
+    # Send the su command
+    send_string_and_wait("sudo docker start 84f49b59336c\n", 3, True, shell)
+    system_su_password ="lifecycle"
+    #Send the client's su password followed by a newline
+    send_string_and_wait(system_su_password + "\n", 3, True, shell)
+```
+4. Open Browser to initiate ODC
+```
+def startBrowser():
+    webbrowser.open("192.168.0.102:8080")
+```
+5. draw line and start recording <- manual or automatically?
+```
+_insert_
+```
+6. Check for current recording
+```
+def getStatus():
+    currentRecording = None
+    while currentRecording is None:
+        try:
+            status= "http://192.168.0.102:8080/status"
+            getStatus = requests.get(status)
+            statusData = getStatus.json()    
+            print("Getting current Recording")
+            currentRecording = statusData["appState"]["recordingStatus"]["recordingId"]
+            print("Current Recording ID: {}".format(currentRecording))
+        except:
+            pass
+    return (currentRecording)
+```
+7. check if current recording is still on
+```
+def CheckForMove():
+    CountPerson = 0
+    while True
+        try:
+            #Check Current Recording ID    
+            currentRecording = getStatus()
+            activeCounter = 'http://192.168.0.102:8080/recording/{}/counter'.format(currentRecording)
+            r = requests.get(activeCounter)
+            data = r.json()
+            print("Check for detection")
+            #If no Person has been detected, the Json File wil not have the person entry. This will throw an Error
+            # which will be caught and pass. Since while is true loop will start again.
+            CountPersonNew = data["counterSummary"][list(data["counterSummary"].keys())[0]]["person"]
+
+            if CountPersonNew > CountPerson:
+                print("Person Detected")
+                lightswitch()
+                CountPerson = CountPersonNew
+            time.sleep(1)
+        except:
+            pass
+
+def lightswitch():
+    GPIO.output(12, GPIO.HIGH)
+    GPIO.output(10, GPIO.HIGH)
+    time.sleep(1)
+    GPIO.output(12, GPIO.LOW)
+    GPIO.output(10, GPIO.LOW)
+    time.sleep(1)
+    GPIO.output(12, GPIO.HIGH)
+    GPIO.output(10, GPIO.HIGH)
+    time.sleep(1)
+    GPIO.output(12, GPIO.LOW)
+    GPIO.output(10, GPIO.LOW)
+    time.sleep(1)
+    GPIO.output(12, GPIO.HIGH)
+    GPIO.output(10, GPIO.HIGH)
+    time.sleep(1)
+    GPIO.output(12, GPIO.LOW)
+    GPIO.output(10, GPIO.LOW)
+    time.sleep(1)
+    GPIO.output(12, GPIO.HIGH)
+    GPIO.output(10, GPIO.HIGH)
+    time.sleep(1)
+    GPIO.output(12, GPIO.LOW)
+    GPIO.output(10, GPIO.LOW)
+```
+```
+8. TODO:open shell and STOP docker container 
+
+
+#------------------------------------------------------------------------------------------------------
+
+#Connect to Jetson and Start Container
+startSSH()
+
+#Check for Person Move
+CheckForMove()
+```
+
 ### Run
 
 ## Other Use Cases
