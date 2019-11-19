@@ -28,7 +28,9 @@ For installation of UBUNTU 18.04 onto _Jetson Boards_ and _Raspberry PI_ out of 
 - a monitor with an HDMI connector
 
 [For general Setup of Jetson Xavier Go Here](https://www.jetsonhacks.com/2018/10/05/jetpack-4-1-developer-preview-nvidia-jetson-agx-xavier-developer-kit/)
+
 [For Setup Jetson Xavier via a VM follow our guide](https://github.com/cjlarswim/life_cycle/blob/master/documentation/XavierSetupViaVirtualMachine.md)
+
 [For Raspberry Pi Setup Go Here](https://www.raspberrypi.org/documentation/)
 
 
