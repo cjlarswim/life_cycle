@@ -47,13 +47,14 @@ For installation of UBUNTU 18.04 onto _Jetson Boards_ and _Raspberry PI_ out of 
 - lamp running on 230V (or any other type of trigger will do)
 
 ![Setup Scheme](https://user-images.githubusercontent.com/25865287/69146282-c3572e00-0acf-11ea-82cc-136b21c07b76.jpeg)
+
+### Connect & Test
 #### Network
 You can establish a network by setting up your raspberry as a hotspot. However, we experienced very low bandwith and hence low performance while testing. This will show as time lags in the detection and triggering of your warning signal. 
 
 Alternatively you can create a setup connecting both machines via an ethernet box. 
 _insert Image of Network Setup here with explanation_
 
-### Connect & Test
 _insert Image of Setup_
 
 #### Connect (see image above)
