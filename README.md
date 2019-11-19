@@ -64,8 +64,17 @@ _insert Image of Setup_
 ### Implement Python Code
 Safe this [code](scripts/raspyprocessing.py) on your Raspberry Pi
 
-To start the code on startup of your Raspberry put the script in the 
+use _touch_ to create file
+```
+touch file_name.py
+```
 
+use _nano_ to edit file
+```
+nano file_name.py
+```
+
+To start the code on startup of your Raspberry put the scriptpath in here 
 ```
 sudo nano /etc/rc.local
 ```
